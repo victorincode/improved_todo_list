@@ -1,0 +1,67 @@
+:root {
+    --height-item-menu: 400px;
+    --width-item-menu: 500px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    position: fixed;
+    font-size: 4rem;
+    width: 100%;
+    color: white;
+    background-color: brown;
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* background-color: black; */
+}
+
+.item-list-container {
+    width: var(--width-item-menu);
+    height: var(--height-item-menu);
+    background-color: green;
+}
+
+
+input.add-item {
+    width: 100%;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+ul {
+    list-style: none;
+    background-color: blue;
+    height: var(--height-item-menu);
+    overflow: auto;
+}
+
+ul li{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+button.delete-button{
+    background-color: red;
+}
