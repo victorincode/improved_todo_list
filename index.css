@@ -36,32 +36,56 @@ header {
 .item-list-container {
     width: var(--width-item-menu);
     height: var(--height-item-menu);
-    background-color: green;
 }
 
 
 input.add-item {
     width: 100%;
-    background-color: black;
+    height: 40px;
+    text-align: center;
+    font-size: 16pt;
+    border: none;
+    background-color: rgb(55, 100, 86);
     color: white;
     box-sizing: border-box;
     outline: none;
+    border-radius: 16px 16px 0 0;
 }
 
 ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
-    background-color: blue;
+    background-color: rgb(39, 73, 70);
+    border-radius: 0 0 16px 16px;
     height: var(--height-item-menu);
     overflow: auto;
+    scrollbar-width: 0;
 }
 
-ul li{
+ul::-webkit-scrollbar{
+    display: none;
+}
+ul p{
     color: white;
+    width: 90%;
+    padding-left: 8px;
+}
+ul li{
     display: flex;
+    flex: 1;
     justify-content: space-between;
-    padding: 8px;
+    background-color: rgb(98, 121, 98);
+    margin-bottom: 6px;
+    align-items: center;
+    border: 2px solid rgb(129, 147, 138);
 }
 
 button.delete-button{
     background-color: red;
+    box-sizing: border-box;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border: none;
 }
