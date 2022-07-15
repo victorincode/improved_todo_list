@@ -1,6 +1,5 @@
 
 class TodoList{
-    // #baseUrl = "https://jsonplaceholder.typicode.com/";
     #baseUrl = "http://localhost:4232/";
     #endUrl = "todos/";
     #storedData = {};
@@ -17,20 +16,17 @@ class TodoList{
     }
     updateData = async () => {
         this.storedData = await this.retrieveApiData();
-        console.log("data updated");
     }
     init = () => {
+        const ulElement = document.querySelector("ul");
         const inputBar = document.querySelector("input");
         inputBar.addEventListener("keyup", event => {
-            if(event.key == "Enter"){
-                const content = event.target.value.trim();
-                if(content !== "") {
-                    this.postItem(content);
-                    inputBar.value = "";
+            if(event.key === "Enter" && event.target.value.trim() !== ""){
+                const content = event.target.value;
+                this.postItem(content);
+                inputBar.value = "";
                 }
-            }
-        });
-        const ulElement = document.querySelector("ul");
+            });
         ulElement.addEventListener("click", event => {
             if(event.target.className == "delete-button" && this.storedData[event.target.id]){
                 this.deleteItem(event.target.id);
@@ -47,15 +43,17 @@ class TodoList{
                 'Content-type': 'application/json; charset=UTF-8',
             }
         });
-        this.updateData();
+        await this.updateData();
+        const ulElement = document.querySelector("ul");
+        ulElement.scrollTop = ulElement.scrollHeight;
+
     }
     deleteItem = async (id) => {
         await fetch(this.#baseUrl + this.#endUrl + id, {
             method: 'DELETE',
         });
         // update the data to keep it synced with the server
-        this.updateData();
-
+        await this.updateData();
     }
     retrieveApiData = async () => {
         const data = await fetch(this.#baseUrl + this.#endUrl)
@@ -68,7 +66,7 @@ class TodoList{
         }
         return makeBetterData;
     }
-    renderItemList = async() => {
+    renderItemList = () => {
         const ulElement = document.querySelector("ul");
         ulElement.innerHTML = "";
         for(let item in this.storedData){
@@ -85,6 +83,7 @@ class TodoList{
             itemElement.append(deleteButton);
             ulElement.append(itemElement);
         }
+        console.log("finished rendering.")
     }
     run = async () => {
         await this.updateData();
